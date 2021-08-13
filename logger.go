@@ -1,3 +1,4 @@
+//package nlogger provides a custom logger service
 package nlogger
 
 import (
@@ -151,8 +152,8 @@ func getFullFileName(fileName string) string {
 	return fullFileName
 }
 
-//NewLog returns a new LoggerService instance with a default file.
-func NewLog() *LoggerService {
+//NewLog returns a new LoggerService instance.
+func NewLogger() *LoggerService {
 	fullFileName := getFullFileName("default.log")
 
 	file, err := os.OpenFile(fullFileName, os.O_RDWR|os.O_CREATE, 0755)
@@ -164,8 +165,8 @@ func NewLog() *LoggerService {
 	return &LoggerService{file}
 }
 
-//NewLogger returns a new LoggerService instance with the provided file name.
-func NewLogger(fileName string) *LoggerService {
+//NewLoggerName is like NewLogger but uses the provided name rather than the default file.
+func NewLoggerName(fileName string) *LoggerService {
 	fullFileName := getFullFileName(fileName)
 
 	file, err := os.OpenFile(fullFileName, os.O_RDWR|os.O_CREATE, 0755)
