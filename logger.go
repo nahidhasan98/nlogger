@@ -36,7 +36,7 @@ type Logger interface {
 }
 
 type LoggerService struct {
-	File *os.File
+	file *os.File
 	//DefaultFile *os.File
 }
 
@@ -49,7 +49,7 @@ func (ls *LoggerService) Error(err error, givenTime time.Time) {
 
 	text := dateTime + " [ Error ]\t\t" + errStr + " - " + givenTime.Format("2006.01.02 15:04:05") + "\n"
 
-	filePath := getFilePath(ls.File)
+	filePath := getFilePath(ls.file)
 	ls.appendToFile(filePath, text)
 }
 
@@ -61,7 +61,7 @@ func (ls *LoggerService) Warn(msg string, givenTime time.Time) {
 
 	text := dateTime + " [ Warn ]\t\t" + msg + " - " + givenTime.Format("2006.01.02 15:04:05") + "\n"
 
-	filePath := getFilePath(ls.File)
+	filePath := getFilePath(ls.file)
 	ls.appendToFile(filePath, text)
 }
 
@@ -79,7 +79,7 @@ func (ls *LoggerService) Update(entity, id interface{}, msg string, givenTime ti
 
 	text := dateTime + " [ Update ]\t\t" + ent + " - " + idStr + ": " + msg + " - " + givenTime.Format("2006.01.02 15:04:05") + "\n"
 
-	filePath := getFilePath(ls.File)
+	filePath := getFilePath(ls.file)
 	ls.appendToFile(filePath, text)
 }
 
@@ -97,7 +97,7 @@ func (ls *LoggerService) Delete(entity, id interface{}, msg string, givenTime ti
 
 	text := dateTime + " [ Delete ]\t\t" + ent + " - " + idStr + ": " + msg + " - " + givenTime.Format("2006.01.02 15:04:05") + "\n"
 
-	filePath := getFilePath(ls.File)
+	filePath := getFilePath(ls.file)
 	ls.appendToFile(filePath, text)
 }
 
@@ -112,7 +112,7 @@ func (ls *LoggerService) Endpoint(ep string, ip interface{}, givenTime time.Time
 
 	text := dateTime + " [ Endpoint ]\t" + ep + " " + ipStr + " - " + givenTime.Format("2006.01.02 15:04:05") + "\n"
 
-	filePath := getFilePath(ls.File)
+	filePath := getFilePath(ls.file)
 	ls.appendToFile(filePath, text)
 }
 
