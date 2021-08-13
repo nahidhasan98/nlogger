@@ -20,19 +20,19 @@ type Logger interface {
 	//
 	//Here entity indicates what type of item is updated such as: user, product, cart etc.
 	//
-	//And id indicates the id of updated item and msg for providing a custom message
+	//And id indicates the id of updated item and msg for providing a custom message.
 	Update(entity, id interface{}, msg string, givenTime time.Time)
 
 	//Delete creates a log for a deleted item.
 	//
 	//Here entity indicates what type of item is deleted such as: user, product, cart etc.
 	//
-	//And id indicates the id of deleted item and msg for providing a custom message
+	//And id indicates the id of deleted item and msg for providing a custom message.
 	Delete(entity, id interface{}, msg string, givenTime time.Time)
 
-	//Endpoint cretes a log describing the provided endpoint that is visited by someone.
+	//Endpoint creates a log describing the provided endpoint that is visited by a client.
 	//
-	//It also mention the visitor's ip address and the visiting time.
+	//It also mention the client's ip address and the visiting time.
 	Endpoint(ep string, ip interface{}, givenTime time.Time)
 }
 
@@ -111,7 +111,7 @@ func (ls *LoggerService) Endpoint(ep string, ip interface{}, givenTime time.Time
 	dateTime := currTime.Format("2006.01.02 15:04:05")
 	ipStr := fmt.Sprintf("%v", ip)
 
-	text := dateTime + " [ Endpoint ]\t" + ep + " " + ipStr + " - " + givenTime.Format("2006.01.02 15:04:05") + "\n"
+	text := dateTime + " [ Endpoint ]\t" + ep + " - " + ipStr + " - " + givenTime.Format("2006.01.02 15:04:05") + "\n"
 
 	filePath := getFilePath(ls.file)
 	ls.appendToFile(filePath, text)
