@@ -128,7 +128,7 @@ func getFilePath(file *os.File) string {
 }
 
 func (ls *LoggerService) appendToFile(fileName, text string) {
-	file, err := os.OpenFile(fileName, os.O_APPEND, 0644)
+	file, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println(err)
 	}
